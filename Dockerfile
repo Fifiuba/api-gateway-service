@@ -2,12 +2,12 @@ FROM node:16
 
 WORKDIR /usr/src/app
 
-COPY files/package*.json ./
+COPY /package*.json ./
 
 RUN npm install
 
-COPY ./files/* ./
+COPY ./* ./
 
 EXPOSE 8080
 
-CMD nmp start
+CMD npm start
