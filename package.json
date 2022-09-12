@@ -4,7 +4,8 @@
   "description": "\"Api Gateway Service\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Fifiuba/api-gateway-service/issues"
   },
-  "homepage": "https://github.com/Fifiuba/api-gateway-service#readme"
+  "homepage": "https://github.com/Fifiuba/api-gateway-service#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
