@@ -1,0 +1,19 @@
+{
+  "name": "api-gateway-service",
+  "version": "1.0.0",
+  "description": "\"Api Gateway Service\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fifiuba/api-gateway-service.git"
+  },
+  "author": "Alejo Villores",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fifiuba/api-gateway-service/issues"
+  },
+  "homepage": "https://github.com/Fifiuba/api-gateway-service#readme"
+}
