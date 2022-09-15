@@ -1,1 +1,1 @@
- sudo docker run -it --rm -p 8001:8080 api-gateway /bin/bash
+ sudo docker run --rm -p 8001:8080 api-gateway
