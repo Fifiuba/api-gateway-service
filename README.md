@@ -5,13 +5,13 @@
 
 ## Docker commands
 
-To build the image and start the api:  
+To build the image:  
 
 ```
 $ sh build_gateway.sh
 ```
 
-To run the image with interactive shell:  
+To run the image and start the api:  
 
 ```
 $ sh start_gateway.sh
@@ -28,5 +28,5 @@ $ sudo docker ps
 Then to stop it enter (on the same console):  
 
 ```
-$ sudo docker stop <image-id>
+$ sudo docker kill <image-id>
 ```
