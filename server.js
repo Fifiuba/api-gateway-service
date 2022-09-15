@@ -29,8 +29,10 @@ var PORT = process.env.PORT || 8080;
 
 
 app.use(bodyParser.json());
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(swaggerSpec)));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(swaggerSpec)));
 app.use("/users",routes.usersServiceRouter);
+app.use("/admins",routes.adminServicesRouter);
+app.use("/journeys",routes.journey);
 
 app.listen(PORT, () => {
     console.log(`Gateway listening on port ${PORT}`)
