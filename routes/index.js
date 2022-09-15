@@ -7,11 +7,6 @@ module.exports = {
     usersServiceRouter,
 }
 
-/**
- * @swagger
- *
- */
-
 usersServiceRouter.route('/passenger/create')
   .post(async (req, res, next) => {
     console.log('redirecting to: http://localhost:8000'+ req.originalUrl);

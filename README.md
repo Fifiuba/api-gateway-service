@@ -5,13 +5,13 @@
 
 ## Docker commands
 
-To build the container:  
+To build the image and start the api:  
 
 ```
 $ sh build_gateway.sh
 ```
 
-To run the image:  
+To run the image with interactive shell:  
 
 ```
 $ sh start_gateway.sh
