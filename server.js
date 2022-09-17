@@ -27,13 +27,14 @@ const app = express()
 
 var PORT = process.env.PORT || 8080;
 
-
 app.use(bodyParser.json());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(swaggerSpec)));
-app.use("/users",routes.usersServiceRouter);
-app.use("/admins",routes.adminServicesRouter);
-app.use("/journeys",routes.journey);
+app.use(routes.servicesRouter);
+
+app.get('/', function(req,res,next){
+    res.send('API gateway');
+});
 
 app.listen(PORT, () => {
     console.log(`Gateway listening on port ${PORT}`)
-})
+});

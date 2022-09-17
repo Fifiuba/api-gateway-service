@@ -1,67 +1,40 @@
 const express = require('express')
 const status = require('http-status')
+const axios = require('axios')
+const registry = require('./registry.json')
 
-const usersServiceRouter = express.Router();
-const adminServicesRouter = express.Router();
-const journeyServicesRouter = express.Router();
-
-const USER_URL = 'http://localhost:8000';
-const ADMIN_URL = 'http://localhost:8002';
-const JOURNEY_URL = 'http://localhost:9000';
+const servicesRouter = express.Router();
 
 module.exports = {
-    usersServiceRouter,
-    adminServicesRouter,
-    journeyServicesRouter,
+    servicesRouter,
+}
+/*
+Autenticacion
+app.all('*',requireAuthentication,callback_que_siga_parseando)
+
+TODO: ver de donde se puede recibir la ruta a cada servicio. Por ahora sale del json registry
+PUEDE que falten los headers en el json que se le pasa a axios.
+*/
+
+
+function redirectToService(req,res){
+  var url = registry.services[req.params.apiName].url + req.params.apiName + (req.params.path? req.params.path : '');
+  console.log(url)
+  axios({
+      method: req.method,
+      url: url,
+      data: req.body
+  }).then( (response) => {
+    res.send(response.data);
+  });
 }
 
-//TODO: ver de donde se puede recibir la ruta a cada servicio
-function redirectToService(url,req,res){
-  res.redirect(status.PERMANENT_REDIRECT,url + req.originalUrl);
-}
 
-usersServiceRouter.route('/passenger/create')
-  .post(async (req, res, next) => {
-    redirectToService(USER_URL,req,res)
+servicesRouter.all("/:apiName/:path?",(req, res) => {
+  if (req.originalUrl.includes('favicon.ico')) {
+    res.status(204).end()
+  }else{
+    redirectToService(req,res);
+  }
 });
 
-usersServiceRouter.route('/passenger/add_address')
-  .patch(async (req, res, next) => {
-    redirectToService(USER_URL,req,res);
-});
-
-usersServiceRouter.route('/driver/create')
-  .post(async (req, res, next) => {
-    redirectToService(USER_URL,req,res);
-});
-
-usersServiceRouter.route('/driver/add_car_info')
-  .patch(async (req, res, next) => {
-    redirectToService(USER_URL,req,res);
-});
-
-
-usersServiceRouter.route('/getUsers')
-  .get(async (req, res, next) => {
-    redirectToService(USER_URL,req,res);
-});
-
-usersServiceRouter.route('/login')
-  .get(async (req, res, next) => {
-    redirectToService(USER_URL,req,res);
-});
-
-adminServiceRouter.route('/')
-  .get(async (req, res, next) => {
-    redirectToService(ADMIN_URL,req,res);
-});
-
-adminServiceRouter.route('/new')
-  .post(async (req, res, next) => {
-    redirectToService(ADMIN_URL,req,res);
-});
-
-journeyServicesRouter.route('/')
-.post(async (req, res, next) => {
-  redirectToService(JOURNEY_URL,req,res);
-});

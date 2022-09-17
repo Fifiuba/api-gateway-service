@@ -1,1 +1,1 @@
-sudo docker build --no-cache -t api-gateway .
+sudo docker build -t api-gateway .
