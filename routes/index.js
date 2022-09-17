@@ -18,7 +18,7 @@ PUEDE que falten los headers en el json que se le pasa a axios.
 
 
 function redirectToService(req,res){
-  var url = registry.services[req.params.apiName].url + req.params.apiName + (req.params.path? req.params.path : '');
+  var url = registry.services[req.params.apiName].url + req.params.apiName + (req.params.path? '/' + req.params.path : '');
   console.log(url)
   axios({
       method: req.method,
