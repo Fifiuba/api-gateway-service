@@ -1,40 +1,29 @@
-require('dotenv').config
-
 const express = require('express')
 const status = require('http-status')
 const axios = require('axios')
 const registry = require('./registry.json')
 const jwt = require('jsonwebtoken')
 
-
 const servicesRouter = express.Router();
 
 module.exports = {servicesRouter}
 
-
-/*
-TODO: ver de donde se puede recibir la ruta a cada servicio. Por ahora sale del json registry
-PUEDE que falten los headers en el json que se le pasa a axios.
-*/
-
-
-function authenticateToken (req,res,next){
-  console.log(jwt.sign({"id":1}, "misupercontrasecreta"))
+async function authenticateToken (req,res,next){
   const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1] //if header is undefined, token will be undefined
-  console.log('the token is: ' + token)
+  const token = authHeader && authHeader.split(' ')[1]
 
   if (token == null) return res.sendStatus(401)
 
   try {
-    const decoded = jwt.verify(token,"misupercontrasecreta")
+    jwt.verify(token,secretOrPublicKey="misupercontrasecreta")
+    next()
   }catch (err){
-    console.log('the error is: ' + err)
-    return res.sendStatus(403)
+    const decoded = jwt.decode(token,secretOrPublicKey="misupercontrasecreta")
+    let login_url = registry.services['admins'] + '/admins/login'
+    if (decoded.user == true) login_url = registry.services['users'] + '/admins/login'
+    const response = await axios.get(login_url)
+    res.send(response.data)
   }
-  console.log('This time there was no error')
-  next()
-  
 }
 
 servicesRouter.all("/:apiName/:path?", authenticateToken, (req, res) => {
