@@ -2,9 +2,9 @@
     "services": {
         "users": {
             "apiName": "users",
-            "host": "http://localhost",
+            "host": "http://backend",
             "port": 8000,
-            "url": "http://localhost:8000/"
+            "url": "http://backend:8000/"
         },
         "admins": {
             "apiName": "admins",

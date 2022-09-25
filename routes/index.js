@@ -32,7 +32,7 @@ async function authenticateToken (req,res,next){
     jwt.verify(token,secretOrPublicKey="misupercontrasecreta")
     next()
   }catch (err){
-    res.send({"status": 403, "detail": "expired token"})//TODO: estandarizar
+    res.send({"status": 403, "detail": "invalid token"})//TODO: estandarizar
   }
 }
 
@@ -48,12 +48,12 @@ async function redirectToService(req,res){
     res.send(response.data)
 
   }catch (err){
+    console.log(err)
     res.send(err.code)
   }
 }
 
 servicesRouter.all("/:apiName/:path?", authenticateToken, (req, res) => {
-  print('aca entra')
   if (req.originalUrl.includes('favicon.ico')) {
     res.status(204).end()
 
