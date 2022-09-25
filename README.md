@@ -8,31 +8,18 @@
 To build the image:  
 
 ```
-$ sh build_gateway.sh
+$ sudo docker compose build
 ```
 
 To run the image and start the api:  
 
 ```
-$ sh start_gateway.sh
+$ sudo docker compose up
 ```
 
-From another terminal, connect the container to the global network:
 
-```
-$ sudo docker network connect <global-network-name> api-gateway
-```
-
-Then the app can be accessed from https://localhost:8001  
-
-To stop the container first check the container id (from a new terminal):  
+To stop the container: 
  
 ```
-$ sudo docker ps
-```
-
-Then to stop it enter (on the same console):  
-
-```
-$ sudo docker stop <image-id>
+$ sudo docker compose down -v
 ```

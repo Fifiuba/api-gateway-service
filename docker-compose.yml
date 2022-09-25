@@ -1,0 +1,10 @@
+version: '3' 
+services: 
+  api-gateway: 
+    build: . 
+    ports:
+    - 8001:8080
+
+networks: 
+  default: 
+      name: users-service_default
