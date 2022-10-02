@@ -12,14 +12,18 @@ const servicesRouter = express.Router();
 module.exports = {servicesRouter, axiosInstance, redirectToService}
 
 async function authenticateToken (req,res,next){
+  if (req.params.path === 'login'){
+    return next();
+
+  }
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
 
   if (token == null) return res.sendStatus(401)
 
   try {
-    jwt.verify(token,secretOrPublicKey="misupercontrasecreta")
-    next()
+    jwt.verify(token,secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN)
+    return next();
   }catch (err){
     res.send(createError(401, 'Expired token'))//TODO: estandarizar
   }
@@ -52,7 +56,4 @@ function processRequest(req, res){
   }
 }
 
-
-servicesRouter.all("/:apiName/:path?\/((?!(login)\w+))", authenticateToken, processRequest);
-
-servicesRouter.all('/:apiName/login', processRequest);
+servicesRouter.all("/:apiName/:path?", authenticateToken, processRequest);
