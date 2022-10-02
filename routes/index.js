@@ -1,26 +1,15 @@
 const express = require('express')
-const status = require('http-status')
 const axios = require('axios')
 const registry = require('./registry.json')
 const jwt = require('jsonwebtoken')
+const createError = require('http-errors')
 require('dotenv').config()
 
-/*TODO: ver si tendria que hacer un axios.create()
-        arreglar el docker para que conecte con otras networks
-        tests
-        login ver si funciona bien
-*/
-const MockAdapter = require("axios-mock-adapter");
 let axiosInstance = axios.create()
-console.log('is ' + process.env.TEST_ENV == 'true')
-if (process.env.TEST_ENV == 'true'){
-  axiosInstance = new MockAdapter(axios)
-  console.log('entered')
-}
 
 const servicesRouter = express.Router();
 
-module.exports = {servicesRouter, axiosInstance}
+module.exports = {servicesRouter, axiosInstance, redirectToService}
 
 async function authenticateToken (req,res,next){
   const authHeader = req.headers['authorization']
@@ -32,12 +21,12 @@ async function authenticateToken (req,res,next){
     jwt.verify(token,secretOrPublicKey="misupercontrasecreta")
     next()
   }catch (err){
-    res.send({"status": 403, "detail": "invalid token"})//TODO: estandarizar
+    res.send(createError(401, 'Expired token'))//TODO: estandarizar
   }
 }
 
 async function redirectToService(req,res){
-  var url = registry.services[req.params.apiName].url + req.params.apiName + (req.params.path? '/' + req.params.path : '');
+  var url = registry.services[req.params.apiName].url + req.originalUrl;
   console.log(url)
   try {
     const response = await axiosInstance({
@@ -53,7 +42,7 @@ async function redirectToService(req,res){
   }
 }
 
-servicesRouter.all("/:apiName/:path?", authenticateToken, (req, res) => {
+function processRequest(req, res){
   if (req.originalUrl.includes('favicon.ico')) {
     res.status(204).end()
 
@@ -61,5 +50,9 @@ servicesRouter.all("/:apiName/:path?", authenticateToken, (req, res) => {
     redirectToService(req, res)
 
   }
-});
+}
 
+
+servicesRouter.all("/:apiName/:path?\/((?!(login)\w+))", authenticateToken, processRequest);
+
+servicesRouter.all('/:apiName/login', processRequest);
