@@ -9,7 +9,7 @@ let axiosInstance = axios.create()
 
 const servicesRouter = express.Router();
 
-module.exports = {servicesRouter, axiosInstance, redirectToService}
+module.exports = {servicesRouter}
 
 async function authenticateToken (req,res,next){
   if (req.params.path === 'login'){
@@ -25,13 +25,12 @@ async function authenticateToken (req,res,next){
     jwt.verify(token,secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN)
     return next();
   }catch (err){
-    res.send(createError(401, 'Expired token'))//TODO: estandarizar
+    res.send(createError(401, 'Expired token'))
   }
 }
 
 async function redirectToService(req,res){
   var url = registry.services[req.params.apiName].url + req.originalUrl;
-  console.log(url)
   try {
     const response = await axiosInstance({
       method: req.method,
@@ -40,9 +39,9 @@ async function redirectToService(req,res){
     });
     res.send(response.data)
 
-  }catch (err){
-    console.log(err)
-    res.send(err.code)
+  }catch (error){
+    //res.status = error.status;
+    res.status(error.code).json(error)
   }
 }
 
