@@ -4,13 +4,19 @@
             "apiName": "users",
             "host": "http://backend",
             "port": 8000,
-            "url": "http://backend:8000/"
+            "url": "http://backend:8000"
         },
         "admins": {
             "apiName": "admins",
             "host":"http://localhost",
             "port": 8000,
-            "url": "http://localhost:8000/"
+            "url": "http://localhost:8000"
+        },
+        "journey": {
+            "apiName": "journey",
+            "host":"http://localhost",
+            "port": 8000,
+            "url": "http://localhost:9000"
         }
     }
 }
