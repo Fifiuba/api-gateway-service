@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken')
 const createError = require('http-errors')
 require('dotenv').config()
 
-let axiosInstance = axios.create()
-
 const servicesRouter = express.Router();
 
 module.exports = {servicesRouter}
@@ -32,7 +30,7 @@ async function authenticateToken (req,res,next){
 async function redirectToService(req,res){
   var url = registry.services[req.params.apiName].url + req.originalUrl;
   try {
-    const response = await axiosInstance({
+    const response = await axios({
       method: req.method,
       url: url,
       data: req.body
@@ -40,8 +38,8 @@ async function redirectToService(req,res){
     res.send(response.data)
 
   }catch (error){
-    //res.status = error.status;
-    res.status(error.code).json(error)
+    res.status = error.status;
+    res.send(error)
   }
 }
 
