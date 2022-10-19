@@ -3,6 +3,7 @@ const {app} = require("../app.js");
 const moxios = require("moxios");
 const request = supertest(app);
 const jwt = require('jsonwebtoken')
+var servicesRegistry = require('../routes/registry.json')
 
 describe("Requests to users service", () => {
 
@@ -27,7 +28,7 @@ describe("Requests to users service", () => {
         const response = await request.get("/users").set('Authorization', token);
         expect(response.status).toBe(200);
         expect(response.body.user).toBe("Sol");
-        expect(moxios.requests.mostRecent().url).toBe("http://backend:8000/users");
+        expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.users.url + "/users");
     });
 
 
@@ -41,7 +42,7 @@ describe("Requests to users service", () => {
         const response = await request.get("/users/1").set('Authorization', token);
         expect(response.status).toBe(200);
         expect(response.body.user).toBe("Solci");
-        expect(moxios.requests.mostRecent().url).toBe("http://backend:8000/users/1");
+        expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.users.url + "/users/1");
         expect(JSON.parse(moxios.requests.mostRecent().config.data)).toMatchObject({})
     });
 
@@ -68,7 +69,7 @@ describe("Requests to users service", () => {
 
         expect(response.status).toBe(200);
         expect(response.body.user).toBe("Sol");
-        expect(moxios.requests.mostRecent().url).toBe("http://backend:8000/users");
+        expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.users.url + "/users");
         expect(JSON.parse(moxios.requests.mostRecent().config.data)).toMatchObject(json)
     });
 
@@ -86,8 +87,58 @@ describe("Requests to users service", () => {
         .send(json)
         expect(response.status).toBe(200);
         expect(response.body.user).toBe("Agus");
-        expect(moxios.requests.mostRecent().url).toBe("http://backend:8000/users/login");
+        expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.users.url + "/users/login");
         expect(JSON.parse(moxios.requests.mostRecent().config.data)).toMatchObject(json)
     });
 
+});
+
+describe("Requests to admin service", () => {
+    beforeEach(() => {
+        moxios.install();
+    
+    });
+    
+    afterEach(() => {
+        moxios.uninstall();
+    });
+
+    it("01 GET to /admins should return mocked response", async () => {
+        const token = 'Bearer ' + jwt.sign({}, process.env.SECRET_ACCESS_TOKEN);
+        moxios.stubRequest(/.*\/admins/, {
+            status: 200,
+            response: {user: "Sol"},
+        })
+
+        const response = await request.get("/admins").set('Authorization', token);
+        expect(response.status).toBe(200);
+        expect(response.body.user).toBe("Sol");
+        expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.admins.url + "/admins");
+    });
+
+});
+
+describe("Requests to journey service", () => {
+    beforeEach(() => {
+        moxios.install();
+    
+    });
+    
+    afterEach(() => {
+        moxios.uninstall();
+    });
+
+
+    it("01 GET to /journey should return mocked response", async () => {
+        const token = 'Bearer ' + jwt.sign({}, process.env.SECRET_ACCESS_TOKEN);
+        moxios.stubRequest(/.*\/journey\/info/, {
+            status: 200,
+            response: {price: 20},
+        })
+
+        const response = await request.get("/journey/info").set('Authorization', token);
+        expect(response.status).toBe(200);
+        expect(response.body.price).toBe(20);
+        expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.journey.url + "/journey/info");
+    });
 });
