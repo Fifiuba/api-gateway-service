@@ -4,7 +4,7 @@
   "description": "\"Api Gateway Service\"",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "start": "nodemon server.js"
   },
   "repository": {
