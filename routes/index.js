@@ -1,56 +1,53 @@
-const express = require('express')
-const axios = require('axios')
-const registry = require('./registry.json')
-const jwt = require('jsonwebtoken')
-const createError = require('http-errors')
-require('dotenv').config()
+const express = require('express');
+const axios = require('axios');
+const registry = require('./registry.json');
+const jwt = require('jsonwebtoken');
+const createError = require('http-errors');
+require('dotenv').config();
 
 const servicesRouter = express.Router();
 
-module.exports = {servicesRouter}
+module.exports = {servicesRouter};
 
-async function authenticateToken (req,res,next){
-  if (req.params.path === 'login'){
+async function authenticateToken(req, res, next) {
+  if (req.params.path === 'login') {
     return next();
-
   }
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
 
-  if (token == null) return res.sendStatus(401)
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.sendStatus(401);
 
   try {
-    jwt.verify(token,secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN)
+    jwt.verify(token, secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN);
     return next();
-  }catch (err){
-    res.send(createError(401, 'Expired token'))
+  } catch (err) {
+    res.send(createError(401, 'Expired token'));
   }
 }
 
-async function redirectToService(req,res){
-  var url = registry.services[req.params.apiName].url + req.originalUrl;
+async function redirectToService(req, res) {
+  const url = registry.services[req.params.apiName].url + req.originalUrl;
   try {
     const response = await axios({
       method: req.method,
       url: url,
-      data: req.body
+      data: req.body,
     });
-    res.send(response.data)
-
-  }catch (error){
+    res.send(response.data);
+  } catch (error) {
     res.status = error.status;
-    res.send(error)
+    res.send(error);
   }
 }
 
-function processRequest(req, res){
+function processRequest(req, res) {
   if (req.originalUrl.includes('favicon.ico')) {
-    res.status(204).end()
-
-  }else{
-    redirectToService(req, res)
-
+    res.status(204).end();
+  } else {
+    redirectToService(req, res);
   }
 }
 
-servicesRouter.all("/:apiName/:path?", authenticateToken, processRequest);
+servicesRouter.all('/:apiName/:path?', authenticateToken, processRequest);

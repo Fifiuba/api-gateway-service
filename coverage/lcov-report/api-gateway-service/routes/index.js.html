@@ -116,10 +116,7 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -158,7 +155,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,69 +164,64 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express')
-const axios = require('axios')
-const registry = require('./registry.json')
-const jwt = require('jsonwebtoken')
-const createError = require('http-errors')
-require('dotenv').config()
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
+const axios = require('axios');
+const registry = require('./registry.json');
+const jwt = require('jsonwebtoken');
+const createError = require('http-errors');
+require('dotenv').config();
 &nbsp;
 const servicesRouter = express.Router();
 &nbsp;
-module.exports = {servicesRouter}
+module.exports = {servicesRouter};
 &nbsp;
-async function authenticateToken (req,res,next){
-  if (req.params.path === 'login'){
+async function authenticateToken(req, res, next) {
+  if (req.params.path === 'login') {
     return next();
-&nbsp;
   }
-  const authHeader = req.headers['authorization']
-  const token = authHeader &amp;&amp; authHeader.split(' ')[1]
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (token == null) <span class="cstat-no" title="statement not covered" >return res.sendStatus(401)</span>
+  const authHeader = req.headers['authorization'];
+  const token = authHeader &amp;&amp; authHeader.split(' ')[1];
+&nbsp;
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (token == null) <span class="cstat-no" title="statement not covered" >return res.sendStatus(401);</span>
 &nbsp;
   try {
-    jwt.verify(token,secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN)
+    jwt.verify(token, secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN);
     return next();
-  }catch (err){
-<span class="cstat-no" title="statement not covered" >    res.send(createError(401, 'Expired token'))</span>
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    res.send(createError(401, 'Expired token'));</span>
   }
 }
 &nbsp;
-async function redirectToService(req,res){
-  var url = registry.services[req.params.apiName].url + req.originalUrl;
+async function redirectToService(req, res) {
+  const url = registry.services[req.params.apiName].url + req.originalUrl;
   try {
     const response = await axios({
       method: req.method,
       url: url,
-      data: req.body
+      data: req.body,
     });
-    res.send(response.data)
-&nbsp;
-  }catch (error){
+    res.send(response.data);
+  } catch (error) {
 <span class="cstat-no" title="statement not covered" >    res.status = error.status;</span>
-<span class="cstat-no" title="statement not covered" >    res.send(error)</span>
+<span class="cstat-no" title="statement not covered" >    res.send(error);</span>
   }
 }
 &nbsp;
-function processRequest(req, res){
+function processRequest(req, res) {
   <span class="missing-if-branch" title="if path not taken" >I</span>if (req.originalUrl.includes('favicon.ico')) {
-<span class="cstat-no" title="statement not covered" >    res.status(204).end()</span>
-&nbsp;
-  }else{
-    redirectToService(req, res)
-&nbsp;
+<span class="cstat-no" title="statement not covered" >    res.status(204).end();</span>
+  } else {
+    redirectToService(req, res);
   }
 }
 &nbsp;
-servicesRouter.all("/:apiName/:path?", authenticateToken, processRequest);
+servicesRouter.all('/:apiName/:path?', authenticateToken, processRequest);
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -238,7 +229,7 @@ servicesRouter.all("/:apiName/:path?", authenticateToken, processRequest);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-20T18:08:37.968Z
+                at 2022-10-20T18:47:37.126Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
