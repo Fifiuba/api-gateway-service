@@ -10,7 +10,7 @@
             "apiName": "admins",
             "host":"http://localhost",
             "port": 8000,
-            "url": "http://localhost:8000"
+            "url": "https://backend-alejovillores.cloud.okteto.net"
         },
         "journey": {
             "apiName": "journey",

@@ -28,7 +28,7 @@ async function authenticateToken(req, res, next) {
 }
 
 async function redirectToService(req, res) {
-  const url = registry.services[req.params.apiName].url + req.originalUrl;
+  const url = registry.services[req.params.apiName].url + '/' + (req.params.path? req.params.path:'')
   try {
     const response = await axios({
       method: req.method,
