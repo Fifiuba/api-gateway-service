@@ -1,6 +1,5 @@
 ## API - Gateway
-[![GitHub issues](https://img.shields.io/github/issues/Fifiuba/api-gateway-service)](https://github.com/Fifiuba/api-gateway-service/issues)
-[![GitHub license](https://img.shields.io/github/license/Fifiuba/api-gateway-service)](https://github.com/Fifiuba/api-gateway-service/blob/main/LICENSE)
+[![codecov](https://codecov.io/gh/Fifiuba/api-gateway-service/branch/develop/graph/badge.svg?token=LPG5XIVJXL)]([https://codecov.io/gh/Fifiuba/api-gateway-service](https://app.codecov.io/gh/Fifiuba/api-gateway-service/tree/develop))
 
 
 ## Docker commands
