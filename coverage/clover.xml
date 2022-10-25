@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666292255696" clover="3.2.0">
-  <project timestamp="1666292255697" name="All files">
-    <metrics statements="38" coveredstatements="33" conditionals="8" coveredconditionals="6" methods="4" coveredmethods="3" elements="50" coveredelements="42" complexity="0" loc="38" ncloc="38" packages="2" files="2" classes="2"/>
+<coverage generated="1666723176381" clover="3.2.0">
+  <project timestamp="1666723176381" name="All files">
+    <metrics statements="38" coveredstatements="33" conditionals="10" coveredconditionals="8" methods="4" coveredmethods="3" elements="52" coveredelements="44" complexity="0" loc="38" ncloc="38" packages="2" files="2" classes="2"/>
     <package name="api-gateway-service">
       <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="app.js" path="/home/sol/Documents/api-gateway-service/app.js">
@@ -20,9 +20,9 @@
       </file>
     </package>
     <package name="api-gateway-service.routes">
-      <metrics statements="27" coveredstatements="23" conditionals="8" coveredconditionals="6" methods="3" coveredmethods="3"/>
+      <metrics statements="27" coveredstatements="23" conditionals="10" coveredconditionals="8" methods="3" coveredmethods="3"/>
       <file name="index.js" path="/home/sol/Documents/api-gateway-service/routes/index.js">
-        <metrics statements="27" coveredstatements="23" conditionals="8" coveredconditionals="6" methods="3" coveredmethods="3"/>
+        <metrics statements="27" coveredstatements="23" conditionals="10" coveredconditionals="8" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -41,15 +41,15 @@
         <line num="24" count="5" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="31" count="6" type="stmt"/>
-        <line num="32" count="6" type="stmt"/>
         <line num="33" count="6" type="stmt"/>
-        <line num="38" count="6" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="39" count="6" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
-        <line num="46" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="49" count="6" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="47" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="6" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
       </file>
     </package>
   </project>
