@@ -32,8 +32,15 @@ This API gateway routes to the following services:
 | Maria Sol Fontenla | msfontenla@fi.uba.ar |
 
 
-# Development Environment
+# Development 
+
+## Development Environment
+
+Instructions to get the service running in a docker container
+
 * First install [docker](https://docs.docker.com/engine/install/) and [docker compose](https://docs.docker.com/compose/install/other/).
+
+* You will need to add a `.env` file, which will contain the secret key with which the jwt token is verified. 
 
 * Then, to build and run the service run the following commands
     ```
@@ -41,10 +48,13 @@ This API gateway routes to the following services:
     docker compose up
     ```
 
-    This will start the app container. After stoppingthe execution, you must run
+    This will start the app's container. After stopping the execution, you must run
     ```
     docker compose down -v
     ```
+## Project Structure 
+
+
 
 # Testing
 ## Run tests
