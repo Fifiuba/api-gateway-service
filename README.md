@@ -7,7 +7,10 @@
 
 # About the API
 
-
+This API gateway routes to the following services:
+* [Users Service](https://backend-agustinaa235.cloud.okteto.net/docs)
+* [Admin Service](https://backend-alejovillores.cloud.okteto.net/docs)
+* [Journey Service](https://journey-service-solfonte.cloud.okteto.net/docs)
 
 ## Technologies
 * Node version 1.0.0
@@ -24,6 +27,10 @@
     * Okteto
 
 ## Developers
+|Name                | email                |
+|--------------------|----------------------|
+| Maria Sol Fontenla | msfontenla@fi.uba.ar |
+
 
 # Development Environment
 * First install [docker](https://docs.docker.com/engine/install/) and [docker compose](https://docs.docker.com/compose/install/other/).
