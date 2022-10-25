@@ -7,30 +7,49 @@
 
 # About the API
 
+
+
 ## Technologies
+* Node version 1.0.0
+* Docker version 20.10.17
+* Docker compose version 2.6.0
+* Libraries
+    * Axios
+    * Express
+    * cors
+    * jsonwebtoken
+    * http-errors
+    * dotenv
+* External services
+    * Okteto
 
 ## Developers
 
-# Development
+# Development Environment
+* First install [docker](https://docs.docker.com/engine/install/) and [docker compose](https://docs.docker.com/compose/install/other/).
 
-## Docker commands
+* Then, to build and run the service run the following commands
+    ```
+    docker compose build
+    docker compose up
+    ```
 
-To build the image:  
-
-```
-$ sudo docker compose build
-```
-
-To run the image and start the api:  
-
-```
-$ sudo docker compose up
-```
-
-To stop the container: 
- 
-```
-$ sudo docker compose down -v
-```
+    This will start the app container. After stoppingthe execution, you must run
+    ```
+    docker compose down -v
+    ```
 
 # Testing
+## Run tests
+To run the test, use the following command
+```
+npm test
+```
+
+## Run the APP
+To run the APP locally
+```
+npm start
+```
+
+## Deployment
