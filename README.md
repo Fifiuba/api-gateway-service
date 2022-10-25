@@ -1,7 +1,7 @@
 ## API - Gateway
 [![codecov](https://codecov.io/gh/Fifiuba/api-gateway-service/branch/develop/graph/badge.svg?token=LPG5XIVJXL)]([https://codecov.io/gh/Fifiuba/api-gateway-service](https://app.codecov.io/gh/Fifiuba/api-gateway-service/tree/develop))
 
-[![main CI](https://github.com/Fifiuba/api-gateway-service/actions/workflows/node.js.yml/badge.svg)](https://github.com/Fifiuba/api-gateway-service/actions/workflows/node.js.yml)
+[![main CI](https://github.com/Fifiuba/api-gateway-service/actions/workflows/node.js.yml/badge.svg)](https://github.com/Fifiuba/api-gateway-service/actions/workflows/main.yml)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Fifiuba/api-gateway-service/blob/develop/LICENSE)
 
