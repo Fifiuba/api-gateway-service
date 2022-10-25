@@ -2,21 +2,15 @@
     "services": {
         "users": {
             "apiName": "users",
-            "host": "http://backend",
-            "port": 8000,
-            "url": "http://backend:8000"
+            "url": "https://backend-agustinaa235.cloud.okteto.net"
         },
         "admins": {
             "apiName": "admins",
-            "host":"http://localhost",
-            "port": 8000,
             "url": "https://backend-alejovillores.cloud.okteto.net"
         },
         "journey": {
             "apiName": "journey",
-            "host":"http://localhost",
-            "port": 8000,
-            "url": "http://localhost:9000"
+            "url": "https://journey-service-solfonte.cloud.okteto.net"
         }
     }
 }
