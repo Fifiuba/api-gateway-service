@@ -7,10 +7,12 @@
 
 # About the API
 
-This API gateway routes to the following services:
-* [Users Service](https://backend-agustinaa235.cloud.okteto.net/docs)
-* [Admin Service](https://backend-alejovillores.cloud.okteto.net/docs)
-* [Journey Service](https://journey-service-solfonte.cloud.okteto.net/docs)
+This is the API gateway used to route requests to the backend services of [FIFIUBA APP](https://github.com/Fifiuba). Itroutes to the following services:
+* [Users service](https://backend-agustinaa235.cloud.okteto.net/docs)
+* [Admin service](https://backend-alejovillores.cloud.okteto.net/docs)
+* [Journey service](https://journey-service-solfonte.cloud.okteto.net/docs)
+* Metrics service
+* Wallet service
 
 ## Technologies
 * Node version 1.0.0
@@ -61,6 +63,10 @@ Instructions to get the service running in a docker container
 To run the test, use the following command
 ```
 npm test
+```
+To run both the linter and the tests you can se the `build_CI.sh` script
+```
+sh build_CI.sh
 ```
 
 ## Run the APP

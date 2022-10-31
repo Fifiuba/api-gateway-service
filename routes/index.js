@@ -51,4 +51,4 @@ function processRequest(req, res) {
   }
 }
 
-servicesRouter.all('/:apiName/:path?', authenticateToken, processRequest);
+servicesRouter.all('/:apiName/:path?', /*authenticateToken, */processRequest);
