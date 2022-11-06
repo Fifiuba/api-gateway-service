@@ -5,17 +5,22 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Fifiuba/api-gateway-service/blob/develop/LICENSE)
 
+# [API URL](https://api-gateway-solfonte.cloud.okteto.net/)
+
 # About the API
 
-This API gateway routes to the following services:
-* [Users Service](https://backend-agustinaa235.cloud.okteto.net/docs)
-* [Admin Service](https://backend-alejovillores.cloud.okteto.net/docs)
-* [Journey Service](https://journey-service-solfonte.cloud.okteto.net/docs)
+This is the API gateway used to route requests to the backend services of [FIFIUBA APP](https://github.com/Fifiuba). It routes to the following services:
+* [Users service](https://backend-agustinaa235.cloud.okteto.net/docs)
+* [Admin service](https://backend-alejovillores.cloud.okteto.net/docs)
+* [Journey service](https://journey-service-solfonte.cloud.okteto.net/docs)
+* Metrics service
+* Wallet service
 
 ## Technologies
 * Node version 1.0.0
 * Docker version 20.10.17
 * Docker compose version 2.6.0
+* Eslint 1.3.3
 * Libraries
     * Axios
     * Express
@@ -25,6 +30,7 @@ This API gateway routes to the following services:
     * dotenv
 * External services
     * Okteto
+    * codecov
 
 ## Developers
 |Name                | email                |
@@ -54,13 +60,29 @@ Instructions to get the service running in a docker container
     ```
 ## Project Structure 
 
-
+```
+.
+├── .github                     # Github actions
+├── coverage                    # Test coverage files
+├── routes                  
+│   ├── index                   # API router
+│   └── registry.json           # Services urls
+├── test                        # Automated tests
+├── app.js                      # API app configuration
+├── server.js                   # API app entry point
+├── LICENSE
+└── README.md
+```
 
 # Testing
 ## Run tests
 To run the test, use the following command
 ```
 npm test
+```
+To run both the linter and the tests you can se the `build_CI.sh` script
+```
+sh build_CI.sh
 ```
 
 ## Run the APP
@@ -70,3 +92,9 @@ npm start
 ```
 
 ## Deployment
+
+To deploy the API, first connect [Okteto](https://www.okteto.com/) to your github account. Then, the API can be deployed by running 
+```
+okteto deploy --build
+```
+(within the project folder)
