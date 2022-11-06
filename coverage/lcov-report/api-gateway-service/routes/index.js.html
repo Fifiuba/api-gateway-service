@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.14% </span>
+                <span class="strong">53.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/28</span>
+                <span class='fraction'>16/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">30% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/10</span>
+                <span class='fraction'>3/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.18% </span>
+                <span class="strong">55.17% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/27</span>
+                <span class='fraction'>16/29</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -117,7 +117,12 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -129,18 +134,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,6 +156,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,6 +164,10 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,19 +192,19 @@ const servicesRouter = express.Router();
 &nbsp;
 module.exports = {servicesRouter};
 &nbsp;
-async function authenticateToken(req, res, next) {
-  if (req.params.path === 'login') {
-    return next();
+async function <span class="fstat-no" title="function not covered" >authenticateToken(</span>req, res, next) {
+<span class="cstat-no" title="statement not covered" >  if (req.params.path === 'login') {</span>
+<span class="cstat-no" title="statement not covered" >    return next();</span>
   }
 &nbsp;
-  const authHeader = req.headers['authorization'];
-  const token = authHeader &amp;&amp; authHeader.split(' ')[1];
+  const authHeader = <span class="cstat-no" title="statement not covered" >req.headers['authorization'];</span>
+  const token = <span class="cstat-no" title="statement not covered" >authHeader &amp;&amp; authHeader.split(' ')[1];</span>
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (token == null) <span class="cstat-no" title="statement not covered" >return res.sendStatus(401);</span>
+<span class="cstat-no" title="statement not covered" >  if (token == null) <span class="cstat-no" title="statement not covered" >return res.sendStatus(401);</span></span>
 &nbsp;
-  try {
-    jwt.verify(token, secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN);
-    return next();
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    jwt.verify(token, secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN);</span>
+<span class="cstat-no" title="statement not covered" >    return next();</span>
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    res.send(createError(401, 'Expired token'));</span>
   }
@@ -204,6 +214,7 @@ async function redirectToService(req, res) {
   const url = registry.services[req.params.apiName].url + '/' +
           req.params.apiName + (req.params.path? ( '/' + req.params.path):'');
   try {
+    console.log(url)
     const response = await axios({
       method: req.method,
       url: url,
@@ -211,8 +222,12 @@ async function redirectToService(req, res) {
     });
     res.send(response.data);
   } catch (error) {
-<span class="cstat-no" title="statement not covered" >    res.status = error.status;</span>
-<span class="cstat-no" title="statement not covered" >    res.send(error);</span>
+<span class="cstat-no" title="statement not covered" >    console.log(error)</span>
+    const response = <span class="cstat-no" title="statement not covered" >{</span>
+      data: error.response.data,
+      status: error.response.status
+    }
+<span class="cstat-no" title="statement not covered" >    res.send(response);</span>
   }
 }
 &nbsp;
@@ -224,7 +239,7 @@ function processRequest(req, res) {
   }
 }
 &nbsp;
-servicesRouter.all('/:apiName/:path?', authenticateToken, processRequest);
+servicesRouter.all('/:apiName/:path?', /*authenticateToken, */processRequest);
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -232,7 +247,7 @@ servicesRouter.all('/:apiName/:path?', authenticateToken, processRequest);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-25T18:39:36.366Z
+                at 2022-11-01T11:29:11.883Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

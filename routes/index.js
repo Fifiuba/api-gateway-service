@@ -36,10 +36,16 @@ async function redirectToService(req, res) {
       url: url,
       data: req.body,
     });
+    console.log(response.data)
+
     res.send(response.data);
   } catch (error) {
-    res.status = error.status;
-    res.send(error);
+    console.log(error)
+    const response = {
+      data: error.response.data,
+      status: error.response.status
+    }
+    res.send(response);
   }
 }
 
