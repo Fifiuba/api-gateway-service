@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.33% </span>
+                <span class="strong">51.35% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/30</span>
+                <span class='fraction'>19/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>4/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.17% </span>
+                <span class="strong">52.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/29</span>
+                <span class='fraction'>19/36</span>
             </div>
         
             
@@ -122,7 +122,21 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -153,10 +167,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,16 +238,30 @@ async function <span class="fstat-no" title="function not covered" >authenticate
   }
 }
 &nbsp;
+function concatenateQueryParameters(queryParams){
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (JSON.stringify(queryParams) === JSON.stringify({})){
+    return "";
+  }
+  let url = <span class="cstat-no" title="statement not covered" >"?";</span>
+<span class="cstat-no" title="statement not covered" >  for (param in queryParams){</span>
+<span class="cstat-no" title="statement not covered" >    url += param + "=" + queryParams[param];</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return url;</span>
+}
+&nbsp;
 async function redirectToService(req, res) {
-  const url = registry.services[req.params.apiName].url + '/' +
-          req.params.apiName + (req.params.path? ( '/' + req.params.path):'');
+  let url = registry.services[req.params.apiName].url + (req.path? req.path : <span class="branch-1 cbranch-no" title="branch not covered" >"")</span>
+  url = url + concatenateQueryParameters(req.query)
+&nbsp;
   try {
-    console.log(url)
+    let headers = req.headers == undefined? <span class="branch-0 cbranch-no" title="branch not covered" >req.headers </span>: {}
     const response = await axios({
       method: req.method,
       url: url,
+      headers: headers,
       data: req.body,
     });
+&nbsp;
     res.send(response.data);
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.log(error)</span>
@@ -239,7 +281,7 @@ function processRequest(req, res) {
   }
 }
 &nbsp;
-servicesRouter.all('/:apiName/:path?', /*authenticateToken, */processRequest);
+servicesRouter.all('/:apiName*', /*authenticateToken, */processRequest);
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -247,7 +289,7 @@ servicesRouter.all('/:apiName/:path?', /*authenticateToken, */processRequest);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-11-01T11:29:11.883Z
+                at 2022-11-15T12:07:14.040Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

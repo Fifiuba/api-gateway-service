@@ -27,16 +27,29 @@ async function authenticateToken(req, res, next) {
   }
 }
 
+function concatenateQueryParameters(queryParams){
+  if (JSON.stringify(queryParams) === JSON.stringify({})){
+    return "";
+  }
+  let url = "?";
+  for (param in queryParams){
+    url += param + "=" + queryParams[param];
+  }
+  return url;
+}
+
 async function redirectToService(req, res) {
-  const url = registry.services[req.params.apiName].url + '/' +
-          req.params.apiName + (req.params.path? ( '/' + req.params.path):'');
+  let url = registry.services[req.params.apiName].url + (req.path? req.path : "")
+  url = url + concatenateQueryParameters(req.query)
+
   try {
+    let headers = req.headers == undefined? req.headers : {}
     const response = await axios({
       method: req.method,
       url: url,
+      headers: headers,
       data: req.body,
     });
-    console.log(response.data)
 
     res.send(response.data);
   } catch (error) {
@@ -57,4 +70,4 @@ function processRequest(req, res) {
   }
 }
 
-servicesRouter.all('/:apiName/:path?', /*authenticateToken, */processRequest);
+servicesRouter.all('/:apiName*', /*authenticateToken, */processRequest);
