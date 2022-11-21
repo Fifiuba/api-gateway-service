@@ -38,28 +38,53 @@ function concatenateQueryParameters(queryParams){
   return url;
 }
 
-async function redirectToService(req, res) {
-  let url = registry.services[req.params.apiName].url + (req.path? req.path : "")
-  url = url + concatenateQueryParameters(req.query)
-
-  try {
-    let headers = req.headers == undefined? req.headers : {}
-    const response = await axios({
-      method: req.method,
+function setAxiosConfig(request){
+  let url = registry.services[request.params.apiName].url + (request.path? request.path : "")
+  url = url + concatenateQueryParameters(request.query)
+  
+  let config = {
+      method: request.method,
       url: url,
-      headers: headers,
-      data: req.body,
-    });
+      data: request.body
+  }
 
+  if (request.headers.authorization != undefined){
+    console.log("authorization " + request.headers.authorization)
+    axios.defaults.headers.common['Authorization'] = request.headers.authorization
+    return config
+  }
+  axios.defaults.headers.common['Authorization'] = ""
+  return config
+}
+
+async function redirectToService(req, res) {
+  if (registry.services[req.params.apiName] == undefined){
+    const response = {
+      data: "Cannot access the requested url",
+      status: 400
+    }
+    res.send(response)
+    return
+  }
+  
+  try {
+    const config = setAxiosConfig(req)
+    console.log(config)
+    const response = await axios(config);
     res.send(response.data);
+    return
   } catch (error) {
     console.log(error)
+    var responseData = error.response == undefined? "" : error.response.data; 
+    var responseStatus = error.response == undefined? "" : error.response.status; 
+
     const response = {
-      data: error.response.data,
-      status: error.response.status
+      data: responseData,
+      status: responseStatus
     }
     res.send(response);
   }
+
 }
 
 function processRequest(req, res) {
@@ -70,4 +95,35 @@ function processRequest(req, res) {
   }
 }
 
+async function listServices(req, res){
+
+  let servicesList = {}
+  for (apiName in registry.services){
+      try {
+      console.log(apiName)
+      let response = await axios({
+        method: 'get',
+        url: registry.services[apiName].url ,
+      })
+      servicesList[apiName] = response.data
+    }catch(error){
+      console.log(error)
+      var responseData = error.response == undefined? "" : error.response.data; 
+      var responseStatus = error.response == undefined? "" : error.response.status; 
+  
+      const response = {
+        data: responseData,
+        status: responseStatus
+      }
+      servicesList[apiName] = response
+    }
+  }
+    
+    res.send(servicesList)
+
+
+}
+
+servicesRouter.get('/services', listServices);
 servicesRouter.all('/:apiName*', /*authenticateToken, */processRequest);
+

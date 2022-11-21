@@ -7,6 +7,8 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : true}));
+
 app.use(routes.servicesRouter);
 
 app.get('/', function(req, res, next) {
