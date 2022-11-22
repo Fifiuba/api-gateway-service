@@ -1,0 +1,59 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Journey Service API",
+        "description": "",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "journey-service-solfonte.cloud.okteto.net",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Journeys",
+            "description": "Api for journeys"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/services": {
+            "get": {
+                "summary": "Get info from every service redirected by the API",
+                "responses":{
+                    "200" : {
+                        "description": "Ok",
+                        "schema": {
+                            "$ref": "#/definitions/services"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":{
+        "serviceInfo": {
+            "type": "array",
+            "properties": {
+                "service name": {
+                    "type": "object",
+                    "items": {
+                        "service": "string",
+                        "created_on": "string",
+                        "description": "string"
+                    }
+                }
+            }
+        }
+    }
+}
