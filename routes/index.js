@@ -9,47 +9,20 @@ const servicesRouter = express.Router();
 
 module.exports = {servicesRouter};
 
-async function authenticateToken(req, res, next) {
-  if (req.params.path === 'login') {
-    return next();
-  }
-
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (token == null) return res.sendStatus(401);
-
-  try {
-    jwt.verify(token, secretOrPublicKey=process.env.SECRET_ACCESS_TOKEN);
-    return next();
-  } catch (err) {
-    res.send(createError(401, 'Expired token'));
-  }
-}
-
-function concatenateQueryParameters(queryParams){
-  if (JSON.stringify(queryParams) === JSON.stringify({})){
-    return "";
-  }
-  let url = "?";
-  for (param in queryParams){
-    url += param + "=" + queryParams[param];
-  }
-  return url;
-}
-
 function setAxiosConfig(request){
   let url = registry.services[request.params.apiName].url + (request.path? request.path : "")
-  url = url + concatenateQueryParameters(request.query)
   
   let config = {
       method: request.method,
       url: url,
-      data: request.body
+      data: request.body,
+  }
+  
+  if (request.query != undefined && JSON.stringify(request.query) !== JSON.stringify({}) ){
+    config['params'] = request.query
   }
 
   if (request.headers.authorization != undefined){
-    console.log("authorization " + request.headers.authorization)
     axios.defaults.headers.common['Authorization'] = request.headers.authorization
     return config
   }
@@ -69,20 +42,19 @@ async function redirectToService(req, res) {
   
   try {
     const config = setAxiosConfig(req)
-    console.log(config)
     const response = await axios(config);
     res.send(response.data);
     return
   } catch (error) {
     console.log(error)
-    var responseData = error.response == undefined? "" : error.response.data; 
+    var responseData = error.response == undefined? "" : error.response.statusText; 
     var responseStatus = error.response == undefined? "" : error.response.status; 
 
     const response = {
       data: responseData,
       status: responseStatus
     }
-    res.send(response);
+    res.sendStatus(response);
   }
 
 }
@@ -100,7 +72,6 @@ async function listServices(req, res){
   let servicesList = {}
   for (apiName in registry.services){
       try {
-      console.log(apiName)
       let response = await axios({
         method: 'get',
         url: registry.services[apiName].url ,
@@ -113,17 +84,14 @@ async function listServices(req, res){
   
       const response = {
         data: responseData,
-        status: responseStatus
+        status: Number(responseStatus)
       }
       servicesList[apiName] = response
     }
   }
-    
     res.send(servicesList)
-
-
 }
 
 servicesRouter.get('/services', listServices);
-servicesRouter.all('/:apiName*', /*authenticateToken, */processRequest);
+servicesRouter.all('/:apiName*', processRequest);
 
