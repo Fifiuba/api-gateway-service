@@ -13,8 +13,8 @@ This is the API gateway used to route requests to the backend services of [FIFIU
 * [Users service](https://backend-agustinaa235.cloud.okteto.net/docs)
 * [Admin service](https://backend-alejovillores.cloud.okteto.net/docs)
 * [Journey service](https://journey-service-solfonte.cloud.okteto.net/docs)
-* Metrics service
-* Wallet service
+* [Payment service](https://payment-service-solfonte.cloud.okteto.net/)
+* [Notification service](https://notifications-service-alejovillores.cloud.okteto.net) 
 
 ## Technologies
 * Node version 1.0.0
@@ -86,15 +86,14 @@ sh build_CI.sh
 ```
 
 ## Run the APP
-To run the APP locally
+To run the app locally
 ```
-npm start
+npm run start
 ```
 
 ## Deployment
 
-To deploy the API, first connect [Okteto](https://www.okteto.com/) to your github account. Then, the API can be deployed by running 
-```
-okteto deploy --build
-```
-(within the project folder)
+To deploy the app:  
+1. Connect [Okteto](https://www.okteto.com/) to your github account.
+2. Go to the project folder
+3. Run `npm run deploy`

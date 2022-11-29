@@ -30,6 +30,7 @@ describe("API Gateway tests", () => {
             })
 
             const response = await request.get("/users").set('Authorization',  'Bearer faketoken');
+
             expect(response.status).toBe(200);
             expect(response.body.user).toBe("Sol");
             expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.users.url + "/users");

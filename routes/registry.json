@@ -11,6 +11,14 @@
         "journey": {
             "apiName": "journey",
             "url": "https://journey-service-solfonte.cloud.okteto.net"
+        },
+        "notification": {
+            "apiName": "journey",
+            "url": "https://notifications-service-alejovillores.cloud.okteto.net"
+        },
+        "payment": {
+            "apiName": "journey",
+            "url": "https://payment-service-solfonte.cloud.okteto.net/"
         }
     }
 }
