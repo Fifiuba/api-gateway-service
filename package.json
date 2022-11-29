@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --collect-coverage",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "deploy": "okteto deploy --build"
   },
   "repository": {
     "type": "git",

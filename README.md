@@ -70,9 +70,14 @@ sh build_CI.sh
 ```
 
 ## Run the APP
-To run the APP locally
+To run the app locally
 ```
-npm start
+npm run start
 ```
 
 ## Deployment
+
+To deploy the app:  
+1. Install [Okteto](https://www.okteto.com/docs/getting-started/)
+2. Go to the project folder
+3. Run `npm run deploy`
