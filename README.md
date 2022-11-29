@@ -96,4 +96,7 @@ npm run start
 To deploy the app:  
 1. Connect [Okteto](https://www.okteto.com/) to your github account.
 2. Go to the project folder
-3. Run `npm run deploy`
+3. Run 
+```
+npm run deploy`
+```
