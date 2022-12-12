@@ -44,7 +44,10 @@ This is the API gateway used to route requests to the backend services of [FIFIU
 
 Instructions to get the service running in a docker container
 
-* First install [docker](https://docs.docker.com/engine/install/) and [docker compose](https://docs.docker.com/compose/install/other/).
+* First install   
+    * [node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
+    * [docker](https://docs.docker.com/engine/install/)  
+    * [docker compose](https://docs.docker.com/compose/install/other/)  
 
 * You will need to add a `.env` file, which will contain the secret key with which the jwt token is verified. 
 
@@ -77,17 +80,18 @@ Instructions to get the service running in a docker container
 # Testing
 ## Run tests
 To run the test, use the following command
-```
+``` bash
 npm test
 ```
 To run both the linter and the tests you can se the `build_CI.sh` script
-```
+``` bash
 sh build_CI.sh
 ```
 
 ## Run the APP
 To run the app locally
 ```
+npm install
 npm run start
 ```
 
