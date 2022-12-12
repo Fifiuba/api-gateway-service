@@ -18,7 +18,7 @@
         },
         "payment": {
             "apiName": "journey",
-            "url": "https://payment-service-solfonte.cloud.okteto.net/"
+            "url": "https://payment-service-solfonte.cloud.okteto.net"
         }
     }
 }
