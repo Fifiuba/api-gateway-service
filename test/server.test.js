@@ -7,11 +7,6 @@ var servicesRegistry = require('../routes/registry.json')
 
 describe("API Gateway tests", () => {
 
-    beforeAll(() => {
-        const verify = jest.spyOn(jwt, 'verify');
-        verify.mockImplementation(() => () => ({ verified: 'true' }));
-    }); 
-
     beforeEach(() => {
         moxios.install();
     
@@ -105,6 +100,20 @@ describe("API Gateway tests", () => {
             expect(response.status).toBe(200);
             expect(response.body.user).toBe("Sol");
             expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.admins.url + "/admins");
+        });
+
+        it("02 POST to /admins/login should return mocked response", async () => {
+            moxios.stubRequest(/.*\/admins\/login/, {
+                status: 401,
+                statusText: "unauthorized user",
+            })
+            let response
+
+            response = await request.post("/admins/login/")
+            console.log(response)
+            expect(response.status).toBe(401);
+            expect(response.text).toBe("unauthorized user");
+            expect(moxios.requests.mostRecent().url).toBe(servicesRegistry.services.admins.url + "/admins/login/");
         });
 
     });
